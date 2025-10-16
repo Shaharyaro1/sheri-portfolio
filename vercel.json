@@ -1,13 +1,7 @@
 {
   "functions": {
-    "api/*.php": {
-      "runtime": "vercel-php@1.0.0"
+    "api/sendmail.js": {
+      "runtime": "nodejs18.x"
     }
-  },
-  "rewrites": [
-    {
-      "source": "/sendmail.php",
-      "destination": "/api/sendmail.php"
-    }
-  ]
+  }
 }
