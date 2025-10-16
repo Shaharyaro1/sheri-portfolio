@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/sendmail.js": {
-      "runtime": "nodejs18.x"
-    }
-  }
-}

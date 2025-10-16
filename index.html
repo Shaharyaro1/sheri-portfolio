@@ -248,36 +248,7 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-async function handleSubmit(event) {
-  event.preventDefault();
 
-  const form = event.target;
-  const data = {
-    firstName: form.firstName.value,
-    lastName: form.lastName.value,
-    email: form.email.value,
-    message: form.message.value
-  };
-
-  try {
-    const res = await fetch("/api/sendmail.js", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-
-    const result = await res.json();
-    alert(result.message);
-    form.reset();
-  } catch (err) {
-    console.error(err);
-    alert("Error sending message. Try again later.");
-  }
-}
-</script>
 </body>
 
 </html>
