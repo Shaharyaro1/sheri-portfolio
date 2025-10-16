@@ -261,7 +261,7 @@ async function handleSubmit(event) {
   };
 
   try {
-    const res = await fetch("/api/sendmail", {
+    const res = await fetch("/api/sendmail.js", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
