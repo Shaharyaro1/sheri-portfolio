@@ -105,3 +105,53 @@ emailjs.send("service_id", "template_id", {
 })
     .then(() => alert("✅ Message Sent!"))
     .catch(() => alert("❌ Failed to send"));
+
+// cv download function
+    function downloadCV() {
+    const link = document.createElement('a');
+    link.href = 'resume/sheri-resume.pdf';
+    link.download = 'Sheri-CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+
+
+        // background  Create Floating Shapes
+       // Create Floating Shapes
+        const shapesContainer = document.querySelector('.floating-shapes');
+        const shapes = ['circle', 'square', 'triangle'];
+        
+        for (let i = 0; i < 15; i++) {
+            const shape = document.createElement('div');
+            shape.className = `shape ${shapes[Math.floor(Math.random() * shapes.length)]}`;
+            shape.style.left = Math.random() * 100 + '%';
+            shape.style.top = Math.random() * 100 + '%';
+            shape.style.animationDelay = Math.random() * 10 + 's';
+            shape.style.animationDuration = (15 + Math.random() * 10) + 's';
+            shapesContainer.appendChild(shape);
+        }
+
+        // Create Particles
+        const particlesContainer = document.querySelector('.particles');
+        
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Mouse Move Parallax Effect
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            
+            document.querySelectorAll('.orb').forEach((orb, index) => {
+                const speed = (index + 1) * 0.5;
+                orb.style.transform = `translate(${moveX * speed}px, ${moveY * speed}px)`;
+            });
+        });
