@@ -69,23 +69,48 @@ document.querySelectorAll('section').forEach(section => {
 // Form submission handler
 function handleSubmit(event) {
     event.preventDefault();
-    const btn = event.target.querySelector('.btn-primary');
+    const form = event.target;
+    const btn = form.querySelector('.btn-primary');
     const originalText = btn.innerHTML;
 
+    // Update button to show loading state
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    btn.style.pointerEvents = 'none';
+    btn.disabled = true;
 
-    setTimeout(() => {
-        btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-        btn.style.background = 'linear-gradient(135deg, #0fb30f, #34e834)';
+    const formData = new FormData(form);
 
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+            btn.style.background = 'linear-gradient(135deg, #0fb30f, #34e834)';
+            form.reset();
+        } else {
+            throw new Error('Failed');
+        }
         setTimeout(() => {
             btn.innerHTML = originalText;
-            btn.style.pointerEvents = 'auto';
-            event.target.reset();
-        }, 2000);
-    }, 1500);
+            btn.disabled = false;
+            btn.style.background = '';
+        }, 2500);
+    })
+    .catch(error => {
+        btn.innerHTML = '<i class="fas fa-times"></i> Failed! Try Again';
+        btn.style.background = 'linear-gradient(135deg, #ff4757, #ff3838)';
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            btn.style.background = '';
+        }, 2500);
+    });
 }
+
+// Attach form handler
+document.getElementById('contact-form').addEventListener('submit', handleSubmit);
 
 // Theme toggle function
 function toggleTheme() {
@@ -98,13 +123,7 @@ function toggleTheme() {
     }
 }
 
-emailjs.send("service_id", "template_id", {
-    from_name: "Sheri",
-    message: "Hello World",
-    reply_to: "user@gmail.com"
-})
-    .then(() => alert("✅ Message Sent!"))
-    .catch(() => alert("❌ Failed to send"));
+
 
 // cv download function
     function downloadCV() {
