@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!------css links-------->
     <link rel="stylesheet" href="style.css">
+    <!------EmailJS library-------->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <!-----------favicon------------->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io (2)/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io (2)/favicon-32x32.png">
@@ -228,7 +230,10 @@
                 </div>
 
                 <div class="contactfrom">
-                    <form class="contact-form" onsubmit="handleSubmit(event)" action="api/sendmail.js" method="POST">
+                    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+                        <input type="hidden" name="access_key" value="71ac1a84-f678-4cf4-b787-6881ae1910d3">
+                        <input type="hidden" name="subject" value="New Contact from Portfolio Website">
+                        <input type="hidden" name="redirect" value="https://web3forms.com/success">
                         <div class="form-row">
                             <div class="form-group">
                                 <div class="input-with-icon">
