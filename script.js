@@ -87,7 +87,7 @@ function handleSubmit(event) {
     .then(data => {
         if (data.success) {
             btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-            btn.style.background = 'linear-gradient(135deg, #0fb30f, #34e834)';
+            btn.style.background = 'linear-gradient(135deg, #5b21b6, #3b82f6)';
             form.reset();
         } else {
             throw new Error('Failed');
@@ -134,5 +134,6 @@ function toggleTheme() {
     link.click();
     document.body.removeChild(link);
 }
+
 
 
