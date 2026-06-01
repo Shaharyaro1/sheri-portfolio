@@ -115,7 +115,7 @@ function handleSubmit(event) {
     })
     .catch(error => {
         btn.innerHTML = '<i class="fas fa-times"></i> Failed! Try Again';
-        btn.style.background =   'linear-gradient(135deg, #ff4757, #ff3838)';
+        btn.style.background = 'linear-gradient(135deg, #ff4757, #ff3838)';
         setTimeout(() => {
             btn.innerHTML = originalText;
             btn.disabled = false;
@@ -149,5 +149,6 @@ function toggleTheme() {
     link.click();
     document.body.removeChild(link);
 }
+
 
 
