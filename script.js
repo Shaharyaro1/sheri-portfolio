@@ -1,3 +1,18 @@
+// Loading Screen Logic
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    
+    // Wait for animations to complete (3 seconds) then fade out
+    setTimeout(() => {
+        loadingScreen.classList.add('fade-out');
+        
+        // Remove from DOM after fade out completes
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 800);
+    }, 3000);
+});
+
 // Text animation for hero section
 const texts = [
     'I build cool web apps 💻',
