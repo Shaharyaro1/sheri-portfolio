@@ -1,17 +1,36 @@
-// Loading Screen Logic
-window.addEventListener('load', () => {
+// Loading Screen Logic - FORCE HIDE
+(function() {
     const loadingScreen = document.getElementById('loading-screen');
     
-    // Wait for animations to complete (3 seconds) then fade out
-    setTimeout(() => {
-        loadingScreen.classList.add('fade-out');
-        
-        // Remove from DOM after fade out completes
-        setTimeout(() => {
+    function forceHideLoading() {
+        if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.visibility = 'hidden';
             loadingScreen.style.display = 'none';
-        }, 800);
-    }, 3000);
-});
+            loadingScreen.style.pointerEvents = 'none';
+            loadingScreen.classList.add('fade-out');
+            
+            // Remove completely from DOM
+            setTimeout(() => {
+                if (loadingScreen.parentNode) {
+                    loadingScreen.parentNode.removeChild(loadingScreen);
+                }
+            }, 500);
+        }
+    }
+    
+    // Multiple fallbacks to ensure loading screen hides
+    setTimeout(forceHideLoading, 2500); // Main timer - 2.5 seconds
+    setTimeout(forceHideLoading, 3000); // Backup timer - 3 seconds
+    
+    window.addEventListener('load', () => {
+        setTimeout(forceHideLoading, 2500);
+    });
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(forceHideLoading, 2500);
+    });
+})();
 
 // Text animation for hero section
 const texts = [
@@ -88,7 +107,7 @@ function handleSubmit(event) {
     const btn = form.querySelector('.btn-primary');
     const originalText = btn.innerHTML;
 
-    // Update button to show loading state
+    // Update button to show loading state (without changing background)
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     btn.disabled = true;
 
@@ -102,7 +121,7 @@ function handleSubmit(event) {
     .then(data => {
         if (data.success) {
             btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-            btn.style.background = 'linear-gradient(135deg, #5b21b6, #3b82f6)';
+            // NO background change
             form.reset();
         } else {
             throw new Error('Failed');
@@ -110,16 +129,14 @@ function handleSubmit(event) {
         setTimeout(() => {
             btn.innerHTML = originalText;
             btn.disabled = false;
-            btn.style.background = '';
         }, 2500);
     })
-    .catch(error => {
+    .catch(() => {
         btn.innerHTML = '<i class="fas fa-times"></i> Failed! Try Again';
-        btn.style.background = 'linear-gradient(135deg, #ff4757, #ff3838)';
+        // NO background change
         setTimeout(() => {
             btn.innerHTML = originalText;
             btn.disabled = false;
-            btn.style.background = '';
         }, 2500);
     });
 }
@@ -138,10 +155,8 @@ function toggleTheme() {
     }
 }
 
-
-
 // cv download function
-    function downloadCV() {
+function downloadCV() {
     const link = document.createElement('a');
     link.href = 'resume/sheri-resume.pdf';
     link.download = 'Sheri-CV.pdf';
@@ -150,5 +165,15 @@ function toggleTheme() {
     document.body.removeChild(link);
 }
 
+// Create Particles - REDUCED from 15 to 8 for better performance
+const particlesContainer = document.querySelector('.particles');
 
-
+for (let i = 0; i < 8; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.bottom = '-10px';
+    particle.style.animationDelay = (i * 1.5) + 's';
+    particle.style.animationDuration = (12 + Math.random() * 8) + 's';
+    particlesContainer.appendChild(particle);
+}

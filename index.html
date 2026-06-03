@@ -3,8 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shaharyar-Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Shaharyar Farooq - Front-end Developer Portfolio. Passionate about creating beautiful, functional web experiences.">
+    <meta name="keywords" content="web developer, front-end developer, portfolio, Shaharyar, HTML, CSS, JavaScript">
+    <meta name="author" content="Shaharyar Farooq">
+    <meta name="theme-color" content="#a855f7">
+    <title>Shaharyar - Portfolio</title>
     <!------css links-------->
     <link rel="stylesheet" href="style.css">
     <!-----------favicon------------->
@@ -47,7 +51,7 @@
                 <span class="name-letter">r</span>
                 <span class="name-letter">o</span>
                 <span class="name-letter">o</span>
-                <span class="name-letter">q</span>
+                <span class="name-letter">Q</span>
             </h1>
             <div class="loading-bar">
                 <div class="loading-progress"></div>
@@ -318,49 +322,15 @@
 
     <script src="script.js" defer></script>
     <script>
-        // Create Floating Shapes - REDUCED for performance
-        const shapesContainer = document.querySelector('.floating-shapes');
-        const shapes = ['circle', 'square', 'triangle'];
-
-        for (let i = 0; i < 6; i++) {
-            const shape = document.createElement('div');
-            shape.className = `shape ${shapes[i % 3]}`;
-            shape.style.left = Math.random() * 100 + '%';
-            shape.style.top = Math.random() * 100 + '%';
-            shape.style.animationDelay = Math.random() * 10 + 's';
-            shape.style.animationDuration = (15 + Math.random() * 10) + 's';
-            shapesContainer.appendChild(shape);
-        }
-
-        // Create Particles - REDUCED for performance
-        const particlesContainer = document.querySelector('.particles');
-
-        for (let i = 0; i < 15; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.bottom = '-10px';
-            particle.style.animationDelay = (i * 1) + 's';
-            particle.style.animationDuration = (12 + Math.random() * 8) + 's';
-            particlesContainer.appendChild(particle);
-        }
-
-        // Mouse Move Parallax - THROTTLED for performance
-        let ticking = false;
-        document.addEventListener('mousemove', (e) => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-                    const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
-                    document.querySelectorAll('.orb').forEach((orb, index) => {
-                        const speed = (index + 1) * 0.5;
-                        orb.style.transform = `translate(${moveX * speed}px, ${moveY * speed}px)`;
-                    });
-                    ticking = false;
-                });
-                ticking = true;
+        // Immediate loading screen hide fallback - 2.5 seconds
+        setTimeout(function() {
+            var loading = document.getElementById('loading-screen');
+            if (loading) {
+                loading.style.opacity = '0';
+                loading.style.display = 'none';
+                loading.style.visibility = 'hidden';
             }
-        });
+        }, 2500);
     </script>
 </body>
 
