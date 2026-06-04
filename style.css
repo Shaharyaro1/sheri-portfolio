@@ -631,10 +631,17 @@ f
            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
        }
 
+       body.light-mode .btn-primary {
+           border: 1px solid #a855f7;
+       }
+
        .btn-primary:hover {
            background: linear-gradient(90deg, #a855f7, #9333ea) !important;
-           transform: translateY(-5px);
-           box-shadow: 0 15px 40px rgba(168, 85, 247, 0.5);
+           box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+       }
+
+       body.light-mode .btn-primary:hover {
+           border: 1px solid #a855f7;
        }
 
        .btn-primary:active,
@@ -642,9 +649,15 @@ f
        .btn-primary:focus-visible,
        .btn-primary:focus-within {
            background: linear-gradient(90deg, #a855f7, #9333ea) !important;
-           transform: translateY(0);
            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
            outline: none !important;
+       }
+
+       body.light-mode .btn-primary:active,
+       body.light-mode .btn-primary:focus,
+       body.light-mode .btn-primary:focus-visible,
+       body.light-mode .btn-primary:focus-within {
+           border: 1px solid #a855f7;
        }
 
        .btn-secondary {
@@ -654,10 +667,17 @@ f
            color: #9333ea;
        }
 
+       body.light-mode .btn-secondary {
+           border: 1px solid #a855f7;
+       }
+
        .btn-secondary:hover {
            background: #ffffff !important;
-           border-color: solid rgba(168, 85, 247, 0.6);
-           transform: translateY(-3px);
+           border-color: solid rgba(168, 85, 247, 0.4);
+       }
+
+       body.light-mode .btn-secondary:hover {
+           border: 1px solid #a855f7;
        }
 
        .btn-secondary:active,
@@ -665,8 +685,13 @@ f
        .btn-secondary:focus-visible {
            background: #ffffff !important;
            border-color: solid rgba(168, 85, 247, 0.4);
-           transform: translateY(0);
            outline: none !important;
+       }
+
+       body.light-mode .btn-secondary:active,
+       body.light-mode .btn-secondary:focus,
+       body.light-mode .btn-secondary:focus-visible {
+           border: 1px solid #a855f7;
        }
 
        /* ===== HERO SECTION ===== */
@@ -998,6 +1023,7 @@ f
            border-radius: 15px;
            border: 1px solid rgba(168, 85, 247, 0.3);
            transition: all 0.3s ease;
+           cursor: pointer;
        }
 
        body.light-mode .contact-info-item {
@@ -1009,6 +1035,11 @@ f
            transform: translateX(5px);
            border-color: rgba(168, 85, 247, 0.6);
            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+       }
+
+       a:has(.contact-info-item) {
+           text-decoration: none;
+           color: inherit;
        }
 
        .contact-info-icon {
@@ -1044,6 +1075,19 @@ f
 
        body.light-mode .contact-info-text p {
            color: rgba(26, 26, 26, 0.9);
+       }
+
+       .contact-info-text p a {
+           cursor: pointer;
+           transition: all 0.3s ease;
+       }
+
+       .contact-info-text p a:hover {
+           color: #a855f7;
+       }
+
+       body.light-mode .contact-info-text p a:hover {
+           color: #9333ea;
        }
 
        .social-section {
@@ -1304,17 +1348,16 @@ f
        }
 
        .btn-primary:hover::before {
-           width: 300px;
-           height: 300px;
+           width: 0;
+           height: 0;
        }
 
        .btn-primary:hover {
-           transform: translateY(-3px);
-           box-shadow: 0 10px 40px rgba(168, 85, 247, 0.5);
+           box-shadow: 0 5px 20px rgba(168, 85, 247, 0.4);
        }
 
        .btn-primary:active {
-           transform: translateY(-3px);
+           box-shadow: 0 5px 20px rgba(168, 85, 247, 0.4);
        }
 
        .btn i {
@@ -1324,7 +1367,7 @@ f
        }
 
        .btn:hover i {
-           transform: translateX(5px);
+           transform: translateX(0);
        }
 
        /* Theme Toggle Button */
