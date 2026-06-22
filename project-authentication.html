@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication App - Project Details</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .project-details-container {
+            min-height: 100vh;
+        }
+        
+        .project-hero-image {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .project-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-hero-image .placeholder {
+            font-size: 8rem;
+            color: rgba(168, 85, 247, 0.3);
+        }
+        
+        .back-button-project {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .back-button-project:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: translateX(-5px);
+        }
+        
+        .project-content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 3rem;
+        }
+        
+        .project-header {
+            margin-bottom: 3rem;
+        }
+        
+        .project-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #a855f7, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+        
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        body.light-mode .meta-item {
+            color: rgba(26, 26, 26, 0.7);
+        }
+        
+        .meta-item i {
+            color: #a855f7;
+            font-size: 1.2rem;
+        }
+        
+        .project-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        body.light-mode .project-description {
+            color: rgba(26, 26, 26, 0.9);
+        }
+        
+        .section-block {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 20px;
+        }
+        
+        body.light-mode .section-block {
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        body.light-mode .section-block p {
+            color: rgba(26, 26, 26, 0.9) !important;
+        }
+        
+        .section-block h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #a855f7;
+            font-weight: 700;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature-item {
+            padding: 1.5rem;
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+        }
+        
+        .feature-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #a855f7;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .feature-item h3 i {
+            font-size: 1.3rem;
+        }
+        
+        .feature-item p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        body.light-mode .feature-item p {
+            color: rgba(26, 26, 26, 0.8);
+        }
+        
+        .technologies-section {
+            margin-bottom: 3rem;
+        }
+        
+        .tech-grid-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .tech-grid {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            width: fit-content;
+        }
+        
+        .tech-grid.auto-scroll {
+            animation: scroll-left 20s linear infinite;
+        }
+        
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .tech-card {
+            flex: 0 0 160px;
+            min-width: 160px;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(147, 51, 234, 0.05));
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 15px;
+            text-align: center;
+            cursor: default;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            border-color: #a855f7;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(147, 51, 234, 0.1));
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.3);
+        }
+        
+        .tech-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #a855f7;
+            display: block;
+        }
+        
+        .tech-card .tech-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        body.light-mode .tech-card .tech-name {
+            color: rgba(26, 26, 26, 0.9);
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .project-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #a855f7, #9333ea);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .project-link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.6);
+        }
+        
+        .project-link-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(168, 85, 247, 0.5);
+        }
+        
+        .project-link-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .project-hero-image {
+                height: 300px;
+            }
+            
+            .back-button-project {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .project-content-section {
+                padding: 2.5rem 1.2rem;
+            }
+            
+            .project-header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+            
+            .project-meta {
+                gap: 1rem;
+            }
+            
+            .meta-item {
+                font-size: 0.85rem;
+            }
+            
+            .meta-item i {
+                font-size: 1rem;
+            }
+            
+            .project-description {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 2rem;
+            }
+            
+            .section-block {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .section-block h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.2rem;
+            }
+            
+            .section-block p {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .feature-item {
+                padding: 1.2rem;
+            }
+            
+            .feature-item h3 {
+                font-size: 1rem;
+            }
+            
+            .feature-item h3 i {
+                font-size: 1.1rem;
+            }
+            
+            .feature-item p {
+                font-size: 0.9rem;
+            }
+            
+            .tech-card {
+                flex: 0 0 120px;
+                padding: 1.5rem 1rem;
+            }
+            
+            .tech-card i {
+                font-size: 2.5rem;
+            }
+            
+            .tech-card .tech-name {
+                font-size: 0.9rem;
+            }
+            
+            .scroll-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .project-links {
+                gap: 1rem;
+            }
+            
+            .project-link-btn {
+                padding: 1rem 1.8rem;
+                font-size: 0.95rem;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .project-hero-image {
+                height: 250px;
+            }
+            
+            .project-hero-image .placeholder {
+                font-size: 5rem;
+            }
+            
+            .back-button-project {
+                padding: 0.5rem 0.9rem;
+                font-size: 0.8rem;
+            }
+            
+            .project-content-section {
+                padding: 2rem 1rem;
+            }
+            
+            .project-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .meta-item {
+                font-size: 0.8rem;
+            }
+            
+            .project-description {
+                font-size: 0.95rem;
+            }
+            
+            .section-block {
+                padding: 1.2rem;
+            }
+            
+            .section-block h2 {
+                font-size: 1.3rem;
+            }
+            
+            .section-block p {
+                font-size: 0.9rem;
+            }
+            
+            .feature-item {
+                padding: 1rem;
+            }
+            
+            .feature-item h3 {
+                font-size: 0.95rem;
+            }
+            
+            .feature-item p {
+                font-size: 0.85rem;
+            }
+            
+            .tech-card {
+                flex: 0 0 100px;
+                padding: 1.2rem 0.8rem;
+            }
+            
+            .tech-card i {
+                font-size: 2rem;
+                margin-bottom: 0.7rem;
+            }
+            
+            .tech-card .tech-name {
+                font-size: 0.85rem;
+            }
+            
+            .scroll-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .project-link-btn {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="project-details-container">
+        <!-- Hero Image Section -->
+        <div class="project-hero-image">
+            <a href="index.html#projects" class="back-button-project">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <i class="fas fa-user-lock placeholder"></i>
+        </div>
+
+        <!-- Content Section -->
+        <div class="project-content-section">
+            <!-- Project Header -->
+            <div class="project-header">
+                <h1>Authentication App</h1>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-tag"></i>
+                        <span>Security • Web App</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-code"></i>
+                        <span>Full Stack</span>
+                    </div>
+                </div>
+                <p class="project-description">
+                    A modern, secure authentication system built with Angular and Firebase, providing enterprise-grade user management and access control. This application demonstrates best practices in web security, user experience, and scalable architecture with real-time authentication state management.
+                </p>
+            </div>
+
+            <!-- Overview Section -->
+            <div class="section-block">
+                <h2><i class="fas fa-info-circle"></i> Project Overview</h2>
+                <p style="line-height: 1.8; color: rgba(255, 255, 255, 0.9); margin-bottom: 1rem;">
+                    This authentication application showcases a production-ready security system that handles user registration, login, and session management with industry-standard practices. Built on Angular's robust framework and Firebase's reliable backend infrastructure, it provides a seamless and secure user experience.
+                </p>
+                <p style="line-height: 1.8; color: rgba(255, 255, 255, 0.9);">
+                    The system implements multiple layers of security including email verification, password strength validation, and secure token-based authentication. It's designed to be easily integrated into any Angular application requiring user authentication.
+                </p>
+            </div>
+
+            <!-- Features Section -->
+            <div class="section-block">
+                <h2><i class="fas fa-shield-alt"></i> Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3><i class="fas fa-key"></i> Secure Login</h3>
+                        <p>Industry-standard security protocols with encrypted authentication</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><i class="fas fa-user-plus"></i> User Registration</h3>
+                        <p>Email verification and password strength validation</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><i class="fas fa-undo-alt"></i> Password Recovery</h3>
+                        <p>Secure email-based password reset functionality</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><i class="fas fa-lock"></i> Protected Routes</h3>
+                        <p>Angular route guards for authenticated-only pages</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><i class="fas fa-clock"></i> Session Management</h3>
+                        <p>Automatic session handling with secure JWT tokens</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Error Handling</h3>
+                        <p>Comprehensive error messages and user feedback</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><i class="fas fa-user-circle"></i> User Profile</h3>
+                        <p>Profile management with real-time updates</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><i class="fas fa-mobile-alt"></i> Responsive Design</h3>
+                        <p>Optimized for all devices and screen sizes</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technologies Section -->
+            <div class="section-block technologies-section">
+                <h2><i class="fas fa-tools"></i> Technologies Used</h2>
+                <div class="tech-grid-wrapper">
+                    <div class="tech-grid auto-scroll" id="tech-grid">
+                        <div class="tech-card">
+                            <i class="fab fa-angular"></i>
+                            <div class="tech-name">Angular</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-file-code"></i>
+                            <div class="tech-name">TypeScript</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-fire"></i>
+                            <div class="tech-name">Firebase</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <div class="tech-name">Auth</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-sync"></i>
+                            <div class="tech-name">RxJS</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fab fa-css3-alt"></i>
+                            <div class="tech-name">CSS3</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-database"></i>
+                            <div class="tech-name">Firestore</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div class="tech-name">Responsive</div>
+                        </div>
+                        <!-- Duplicate for seamless loop -->
+                        <div class="tech-card">
+                            <i class="fab fa-angular"></i>
+                            <div class="tech-name">Angular</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-file-code"></i>
+                            <div class="tech-name">TypeScript</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-fire"></i>
+                            <div class="tech-name">Firebase</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <div class="tech-name">Auth</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-sync"></i>
+                            <div class="tech-name">RxJS</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fab fa-css3-alt"></i>
+                            <div class="tech-name">CSS3</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-database"></i>
+                            <div class="tech-name">Firestore</div>
+                        </div>
+                        <div class="tech-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div class="tech-name">Responsive</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Links -->
+            <div class="project-links">
+                <a href="https://authentication0.vercel.app/" target="_blank" class="project-link-btn">
+                    <i class="fas fa-external-link-alt"></i> Visit Live Project
+                </a>
+                <a href="https://github.com/yourusername/authentication" target="_blank" class="project-link-btn secondary">
+                    <i class="fab fa-github"></i> View Source Code
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,6 +1,9 @@
-// Loading Screen Logic - FORCE HIDE
+// Loading Screen Logic - Show only on first visit
 (function() {
     const loadingScreen = document.getElementById('loading-screen');
+    
+    // Check if user has already visited in this session
+    const hasVisited = sessionStorage.getItem('hasVisited');
     
     function forceHideLoading() {
         if (loadingScreen) {
@@ -19,17 +22,22 @@
         }
     }
     
-    // Multiple fallbacks to ensure loading screen hides
-    setTimeout(forceHideLoading, 2500); // Main timer - 2.5 seconds
-    setTimeout(forceHideLoading, 3000); // Backup timer - 3 seconds
-    
-    window.addEventListener('load', () => {
+    // If already visited, hide immediately
+    if (hasVisited) {
+        forceHideLoading();
+    } else {
+        // First visit - show loading screen then hide after 2.5 seconds
+        sessionStorage.setItem('hasVisited', 'true');
         setTimeout(forceHideLoading, 2500);
-    });
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(forceHideLoading, 2500);
-    });
+        
+        window.addEventListener('load', () => {
+            setTimeout(forceHideLoading, 2500);
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(forceHideLoading, 2500);
+        });
+    }
 })();
 
 // Text animation for hero section
